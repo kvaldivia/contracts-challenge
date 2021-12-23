@@ -1,0 +1,162 @@
+<div class="page">
+  <div class="content">
+    <div class="title">Contracts for Client</div>
+    <div class="container">
+      <div class="row justify-content-between controls">
+        <mat-form-field class="got-input search-input" appearance="outline">
+          <mat-icon matPrefix>search</mat-icon>
+          <input matInput type="text" [(ngModel)]="searchString" />
+          <mat-label>Search</mat-label>
+        </mat-form-field>
+        <button class="col-lg-4 btn-filter" mat-icon-button matSuffix>
+          <mat-icon>filter_list</mat-icon>
+          Filter
+        </button>
+        <button class="col-lg-6 btn-new-hire" mat-icon-button matSuffix>
+          <mat-icon>add</mat-icon>
+          New hire
+        </button>
+      </div>
+      <div class="row flex-row justify-content-between controls">
+        <div class="col got-input">
+          <mat-form-field appearance="outline" class="contract-date">
+            <input
+              matInput
+              [matDatepicker]="picker"
+              placeholder="Chose a date"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="col got-input">
+          <mat-form-field class="contract-type" appearance="outline">
+            <mat-label>Contract type</mat-label>
+            <mat-select>
+              <mat-option
+                *ngFor="let contractType of contractTypes"
+                [value]="contractType.value"
+              >
+                {{ contractType.viewValue }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col got-input">
+          <mat-form-field
+            class="contractor-name"
+            appearance="outline"
+          >
+            <input matInput type="text" [(ngModel)]="contractor.name" />
+            <mat-label>Contractor name</mat-label>
+          </mat-form-field>
+        </div>
+        <div class="col got-input">
+          <mat-form-field class="status" appearance="outline">
+            <mat-label>Status</mat-label>
+            <mat-select>
+              <mat-option
+                *ngFor="let status of statusList"
+                [value]="status.value"
+              >
+                {{ status.viewValue }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <table mat-table [dataSource]="dataSource" class="table-contractors">
+          <!-- UI helper Column -->
+          <ng-container matColumnDef="startMargin">
+            <th mat-header-cell *matHeaderCellDef class="col-margin"></th>
+            <td mat-cell *matCellDef="let entry" class="col-margin">
+            </td>
+          </ng-container>
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef class="col-header">Contractor name</th>
+            <td mat-cell *matCellDef="let entry" class="col-contractor">
+              <div class="contractor-personal-info">
+                <img src="https://placeimg.com/48/48/any">
+                <span>{{ entry.contractor.name }}</span>
+              </div>
+            </td>
+          </ng-container>
+
+          <!-- Type Column -->
+          <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef class="col-header">Type</th>
+            <td mat-cell *matCellDef="let entry" class="col-contractor">
+              {{ entry.contractor.contractType }}
+            </td>
+          </ng-container>
+
+          <!-- Start date Column -->
+          <ng-container matColumnDef="startDate">
+            <th mat-header-cell *matHeaderCellDef class="col-header">Start date</th>
+            <td mat-cell *matCellDef="let entry" class="col-contractor">
+              {{ entry.contractor.startDate | date }}
+            </td>
+          </ng-container>
+
+          <!-- Amount Column -->
+          <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef class="col-header">Amount</th>
+            <td mat-cell *matCellDef="let entry" class="col-contractor">
+              {{ entry.contractor.amount.amount | currency }} {{ entry.contractor.amount.code }}
+            </td>
+          </ng-container>
+
+          <!-- status Column -->
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef class="col-header">Status</th>
+            <td mat-cell *matCellDef="let entry" class="col-contractor">
+              {{ entry.contractor.status }}
+            </td>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef class="col-header">Actions</th>
+            <td mat-cell *matCellDef="let entry" class="col-contractor">
+              <button
+                mat-icon-button
+                [matMenuTriggerFor]="menu"
+                aria-label="Example icon-button with a menu"
+              >
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item>
+                  <mat-icon>dialpad</mat-icon>
+                  <span>Redial</span>
+                </button>
+                <button mat-menu-item disabled>
+                  <mat-icon>voicemail</mat-icon>
+                  <span>Check voice mail</span>
+                </button>
+                <button mat-menu-item>
+                  <mat-icon>notifications_off</mat-icon>
+                  <span>Disable alerts</span>
+                </button>
+              </mat-menu>
+            </td>
+          </ng-container>
+          <!-- UI helper Column -->
+          <ng-container matColumnDef="endMargin">
+            <th mat-header-cell *matHeaderCellDef class="col-margin"></th>
+            <td mat-cell *matCellDef="let entry" class="col-margin">
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns" class="row-contractor"></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
