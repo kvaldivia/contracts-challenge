@@ -17,6 +17,11 @@
       justify-content: flex-start;
       align-items: center;
       padding-left: 11px;
+      max-width: 162px;
+
+      @media only screen and (max-width: 768px) {
+        max-width: 112px;
+      }
 
       &::before {
         height: 7px;

@@ -17,6 +17,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatCardModule } from '@angular/material/card';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -49,6 +50,7 @@ import { ContractsPageComponent } from './presentation/pages/contracts-page/cont
     MatNativeDateModule,
     MatTableModule,
     MatMenuModule,
+    MatCardModule,
     NgbModule,
   ],
   providers: [ MatDatepickerModule],

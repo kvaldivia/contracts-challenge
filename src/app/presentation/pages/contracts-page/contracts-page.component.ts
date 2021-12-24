@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 import { EnumContractStatus } from '../../../lib/interfaces';
 import { State as TagState } from '../../components/status-tag/status-tag.component';
 
@@ -154,7 +157,7 @@ const ELEMENT_DATA: { position: number; contractor: Contractor }[] = [
   templateUrl: './contracts-page.component.html',
   styleUrls: ['./contracts-page.component.scss'],
 })
-export class ContractsPageComponent implements OnInit {
+export class ContractsPageComponent implements OnInit, OnDestroy {
   searchString: string = '';
   statusMap = new Map<EnumContractStatus, string>([
     [EnumContractStatus.ACTIVE, 'Active'],
@@ -169,6 +172,18 @@ export class ContractsPageComponent implements OnInit {
   contractor: {
     name: string;
   } = { name: 'John Dev' };
+
+  destroyed = new Subject<void>();
+  currentScreenSize: string = 'large';
+
+  // Create a map to display breakpoint names for demonstration purposes.
+  displayNameMap = new Map([
+    [Breakpoints.XSmall, 'xsmall'],
+    [Breakpoints.Small, 'small'],
+    [Breakpoints.Medium, 'medium'],
+    [Breakpoints.Large, 'large'],
+    [Breakpoints.XLarge, 'xlarge'],
+  ]);
 
   contractTypes: {
     value: string;
@@ -185,11 +200,32 @@ export class ContractsPageComponent implements OnInit {
     'endMargin',
   ];
   dataSource = ELEMENT_DATA;
-  constructor() {
+  constructor(private _breakpointObserver: BreakpointObserver) {
+    this._breakpointObserver.observe([
+        Breakpoints.XSmall,
+        Breakpoints.Small,
+        Breakpoints.Medium,
+        Breakpoints.Large,
+        Breakpoints.XLarge,
+      ])
+      .pipe(takeUntil(this.destroyed))
+      .subscribe(result => {
+        for (const query of Object.keys(result.breakpoints)) {
+          if (result.breakpoints[query]) {
+            this.currentScreenSize = this.displayNameMap.get(query) ?? 'Unknown';
+            console.log(this.currentScreenSize);
+          }
+        }
+      });
     console.log(this.statusMap);
   }
 
   ngOnInit(): void {}
+
+  ngOnDestroy() {
+    this.destroyed.next();
+    this.destroyed.complete();
+  }
 
   get statusList(): EnumContractStatus[] {
     return Array.from(this.statusMap.keys());
