@@ -1,0 +1,22 @@
+@import '../../../../theme.scss';
+
+:host {
+  .fab {
+    position: fixed;
+    bottom: 150px;
+    right: 68px;
+    width: 79px;
+    height: 79px;
+
+    @media only screen and (max-width: 1080px) {
+      bottom: 25px;
+      right: 25px;
+    }
+
+    .fab-icon {
+      font-size: 36px;
+      width: auto;
+      height: auto;
+    }
+  }
+}

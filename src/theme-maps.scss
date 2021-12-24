@@ -1,0 +1,3 @@
+@use '~@angular/material' as mat;
+@use "~material-theme-creator/ngx-mtc" as ngx-mtc;
+$primary-map: ngx-mtc.create-theme-map('primary');

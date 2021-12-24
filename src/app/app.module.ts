@@ -22,6 +22,7 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { StatusTagComponent } from './presentation/components/status-tag/status-tag.component';
+import { FABComponent } from './presentation/components/fab/fab.component';
 import { NavBarComponent } from './presentation/components/nav-bar/nav-bar.component';
 import { ContractsPageComponent } from './presentation/pages/contracts-page/contracts-page.component';
 
@@ -30,7 +31,8 @@ import { ContractsPageComponent } from './presentation/pages/contracts-page/cont
     AppComponent,
     NavBarComponent,
     ContractsPageComponent,
-    StatusTagComponent
+    StatusTagComponent,
+    FABComponent,
   ],
   imports: [
     BrowserModule,

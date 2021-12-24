@@ -1,13 +1,47 @@
+@use '~@angular/material' as mat;
+@use "~material-theme-creator/ngx-mtc" as ngx-mtc;
+
 @import '~@angular/material/theming';
-@include mat-core();
+@import './theme-maps.scss';
 
-$my-custom-primary: mat-palette($mat-pink);
-$my-custom-accent: mat-palette($mat-pink, 100, 500, A100);
-$my-custom-warn: mat-palette($mat-lime);
+@include mat.core();
+@include ngx-mtc.init();
 
-$my-custom-theme: mat-light-theme($my-custom-primary, $my-custom-accent, $my-custom-warn);
 
-@include angular-material-theme($my-custom-theme);
+$primary-map: ngx-mtc.create-theme-map('primary');
+$accent-map: ngx-mtc.create-theme-map('accent');
+$warn-map: ngx-mtc.create-theme-map('warn');
+
+$primary-palette: mat.define-palette($primary-map);
+$accent-palette: mat.define-palette($accent-map);
+$warn-palette: mat.define-palette($warn-map);
+
+// Custom theme
+$theme: ngx-mtc.custom-theme($primary-palette, $accent-palette, $warn-palette);
+
+// Creates Angular Material Theme
+@include mat.all-component-themes($theme);
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --is-dark-theme: 1;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --is-dark-theme: 0;
+  }
+}
+
+:root {
+  @include ngx-mtc.theme-base(); // Creates base colors
+
+  // Creates theme colors
+  @include ngx-mtc.create-variables-from-color('primary', #EBEBEB, 38%);
+  @include ngx-mtc.create-variables-from-color('accent', #FF5A70, 80%);
+  @include ngx-mtc.create-variables-from-map('warn', mat.$red-palette);
+}
 
 .mat-form-field-appearance-outline .mat-form-field-outline {
   color: rgba(0, 0, 0, 0.12);
