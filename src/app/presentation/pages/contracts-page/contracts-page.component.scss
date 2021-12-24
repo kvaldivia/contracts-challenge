@@ -7,6 +7,8 @@
 
 
   .got-input {
+    display: flex;
+    justify-content: center;
     width: 100%;
     height: 40px;
     padding: unset;
@@ -27,25 +29,25 @@
 
     // TODO(Kenny): we should define variables for the height and width of inputs
     
-    .contract-date {
+    &.contract-date {
       width: 100%;
       height: auto;
       max-width: 266px;
     }
 
-    .contract-type {
+    &.contract-type {
       width: 100%;
       height: auto;
       max-width: 206px;
     }
 
-    .contractor-name {
+    &.contractor-name {
       width: 100%;
       height: auto;
       max-width: 328px;
     }
 
-    .status {
+    &.status {
       width: 100%;
       height: auto;
       max-width: 190px;

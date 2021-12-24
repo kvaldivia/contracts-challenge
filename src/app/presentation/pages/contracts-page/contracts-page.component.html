@@ -3,7 +3,7 @@
     <div class="title">Contracts for Client</div>
     <div class="container">
       <div class="row justify-content-between controls">
-        <mat-form-field class="got-input search-input" appearance="outline">
+        <mat-form-field class="d-block w-100 got-input search-input" appearance="outline">
           <mat-icon matPrefix>search</mat-icon>
           <input matInput type="text" [(ngModel)]="searchString" />
           <mat-label>Search</mat-label>
@@ -18,8 +18,8 @@
         </button>
       </div>
       <div class="row flex-row justify-content-between controls">
-        <div class="col got-input">
-          <mat-form-field appearance="outline" class="contract-date">
+        <div class="got-input contract-date">
+          <mat-form-field appearance="outline" class="w-100">
             <input
               matInput
               [matDatepicker]="picker"
@@ -32,8 +32,8 @@
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
         </div>
-        <div class="col got-input">
-          <mat-form-field class="contract-type" appearance="outline">
+        <div class="got-input contract-type">
+          <mat-form-field appearance="outline" class="w-100">
             <mat-label>Contract type</mat-label>
             <mat-select>
               <mat-option
@@ -45,17 +45,17 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="col got-input">
+        <div class="got-input contractor-name">
           <mat-form-field
-            class="contractor-name"
+              class="w-100"
             appearance="outline"
           >
             <input matInput type="text" [(ngModel)]="contractor.name" />
             <mat-label>Contractor name</mat-label>
           </mat-form-field>
         </div>
-        <div class="col got-input">
-          <mat-form-field class="status" appearance="outline">
+        <div class="got-input status">
+          <mat-form-field appearance="outline" class="w-100">
             <mat-label>Status</mat-label>
             <mat-select>
               <mat-option
