@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { EnumContractStatus } from '../../../lib/interfaces';
+import { State as TagState } from '../../components/status-tag/status-tag.component';
 
 export interface Contractor {
   name: string;
@@ -8,10 +10,11 @@ export interface Contractor {
     amount: number;
     code: string;
   };
-  status: string;
+  status: EnumContractStatus;
 }
 
 const TRADITIONAL = 'Traditional';
+
 
 const ELEMENT_DATA: { position: number; contractor: Contractor }[] = [
   {
@@ -24,7 +27,7 @@ const ELEMENT_DATA: { position: number; contractor: Contractor }[] = [
       },
       startDate: Date.now(),
       contractType: TRADITIONAL,
-      status: 'active',
+      status: EnumContractStatus.ACTIVE,
     },
   },
   {
@@ -37,7 +40,7 @@ const ELEMENT_DATA: { position: number; contractor: Contractor }[] = [
       },
       startDate: Date.now(),
       contractType: TRADITIONAL,
-      status: 'signature pending',
+      status: EnumContractStatus.SIGNATURE_PENDING,
     },
   },
   {
@@ -50,7 +53,7 @@ const ELEMENT_DATA: { position: number; contractor: Contractor }[] = [
       },
       startDate: Date.now(),
       contractType: TRADITIONAL,
-      status: 'signature pending',
+      status: EnumContractStatus.SIGNATURE_PENDING,
     },
   },
   {
@@ -63,7 +66,7 @@ const ELEMENT_DATA: { position: number; contractor: Contractor }[] = [
       },
       startDate: Date.now(),
       contractType: TRADITIONAL,
-      status: 'active',
+      status: EnumContractStatus.ACTIVE,
     },
   },
   {
@@ -76,7 +79,7 @@ const ELEMENT_DATA: { position: number; contractor: Contractor }[] = [
       },
       startDate: Date.now(),
       contractType: TRADITIONAL,
-      status: 'active',
+      status: EnumContractStatus.ACTIVE,
     },
   },
   {
@@ -89,7 +92,7 @@ const ELEMENT_DATA: { position: number; contractor: Contractor }[] = [
       },
       startDate: Date.now(),
       contractType: TRADITIONAL,
-      status: 'active',
+      status: EnumContractStatus.ACTIVE,
     },
   },
   {
@@ -102,7 +105,7 @@ const ELEMENT_DATA: { position: number; contractor: Contractor }[] = [
       },
       startDate: Date.now(),
       contractType: TRADITIONAL,
-      status: 'active',
+      status: EnumContractStatus.ACTIVE,
     },
   },
   {
@@ -115,7 +118,7 @@ const ELEMENT_DATA: { position: number; contractor: Contractor }[] = [
       },
       startDate: Date.now(),
       contractType: TRADITIONAL,
-      status: 'active',
+      status: EnumContractStatus.ACTIVE,
     },
   },
   {
@@ -128,7 +131,7 @@ const ELEMENT_DATA: { position: number; contractor: Contractor }[] = [
       },
       startDate: Date.now(),
       contractType: TRADITIONAL,
-      status: 'active',
+      status: EnumContractStatus.ACTIVE,
     },
   },
   {
@@ -141,7 +144,7 @@ const ELEMENT_DATA: { position: number; contractor: Contractor }[] = [
       },
       startDate: Date.now(),
       contractType: TRADITIONAL,
-      status: 'active',
+      status: EnumContractStatus.ACTIVE,
     },
   },
 ];
@@ -153,13 +156,15 @@ const ELEMENT_DATA: { position: number; contractor: Contractor }[] = [
 })
 export class ContractsPageComponent implements OnInit {
   searchString: string = '';
-  statusList: {
-    value: string;
-    viewValue: string;
-  }[] = [
-    { value: 'AVAILABLE', viewValue: 'Available' },
-    { value: 'UNAVAILABLE', viewValue: 'Unavailable' },
-  ];
+  statusMap = new Map<EnumContractStatus, string>([
+    [EnumContractStatus.ACTIVE, 'Active'],
+    [EnumContractStatus.SIGNATURE_PENDING, 'Signature pending'],
+  ]);
+
+  statusTagState = new Map<EnumContractStatus, TagState>([
+    [EnumContractStatus.ACTIVE, 'success'],
+    [EnumContractStatus.SIGNATURE_PENDING, 'warning'],
+  ]);
 
   contractor: {
     name: string;
@@ -180,7 +185,21 @@ export class ContractsPageComponent implements OnInit {
     'endMargin',
   ];
   dataSource = ELEMENT_DATA;
-  constructor() {}
+  constructor() {
+    console.log(this.statusMap);
+  }
 
   ngOnInit(): void {}
+
+  get statusList(): EnumContractStatus[] {
+    return Array.from(this.statusMap.keys());
+  }
+
+  getStatusName(key: EnumContractStatus): string | undefined {
+    return this.statusMap.get(key);
+  }
+
+  getStatusTagState(key: EnumContractStatus): TagState | undefined {
+    return this.statusTagState.get(key);
+  }
 }

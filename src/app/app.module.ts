@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -19,14 +18,18 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatMenuModule } from '@angular/material/menu';
 import { FormsModule } from '@angular/forms';
-import { ContractsPageComponent } from './contracts-page/contracts-page.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+import { StatusTagComponent } from './presentation/components/status-tag/status-tag.component';
+import { NavBarComponent } from './presentation/components/nav-bar/nav-bar.component';
+import { ContractsPageComponent } from './presentation/pages/contracts-page/contracts-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
-    ContractsPageComponent
+    ContractsPageComponent,
+    StatusTagComponent
   ],
   imports: [
     BrowserModule,

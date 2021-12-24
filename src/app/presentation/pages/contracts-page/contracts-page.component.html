@@ -59,10 +59,10 @@
             <mat-label>Status</mat-label>
             <mat-select>
               <mat-option
-                *ngFor="let status of statusList"
-                [value]="status.value"
+                *ngFor="let statusKey of statusList"
+                [value]="statusKey"
               >
-                {{ status.viewValue }}
+                {{ getStatusName(statusKey) }}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -115,7 +115,7 @@
           <ng-container matColumnDef="status">
             <th mat-header-cell *matHeaderCellDef class="col-header">Status</th>
             <td mat-cell *matCellDef="let entry" class="col-contractor">
-              {{ entry.contractor.status }}
+              <app-status-tag [state]="getStatusTagState(entry.contractor.status)">{{ getStatusName(entry.contractor.status) | titlecase }}</app-status-tag>
             </td>
           </ng-container>
 

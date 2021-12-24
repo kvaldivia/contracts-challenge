@@ -1,0 +1,59 @@
+@import '../../../../fonts.scss';
+
+:host {
+
+  div {
+    span {
+      background-color: rgba(54, 207, 130, 0.18);
+      border-radius: 20px;
+      height: 24px !important;
+      font-family: Aileron, "Helvetica Neue", sans-serif !important;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 10px;
+      line-height: 12px;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      padding-left: 11px;
+
+      &::before {
+        height: 7px;
+        width: 7px;
+        margin-right: 10px;
+        display: flex;
+        border-radius: 50px;
+      }
+
+      &.success {
+        background: rgba(54, 207, 130, 0.18);
+        color: #36CF82;
+
+        &::before {
+          content: "";
+          background: #36CF82;
+        }
+      }
+
+      &.warning {
+        background: rgba(242, 157, 66, 0.3);
+        color: #F29D42;
+        &::before {
+          content: "";
+          background: #F29D42;
+        }
+      }
+
+      &.default {
+        background: gray;
+        color: black;
+        &::before {
+          content: "";
+          background: black;
+        }
+      }
+
+    }
+  }
+}
