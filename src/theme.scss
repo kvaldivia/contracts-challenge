@@ -22,20 +22,21 @@ $theme: ngx-mtc.custom-theme($primary-palette, $accent-palette, $warn-palette);
 // Creates Angular Material Theme
 @include mat.all-component-themes($theme);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --is-dark-theme: 1;
-  }
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    --is-dark-theme: 0;
-  }
-}
+// @media (prefers-color-scheme: dark) {
+//   :root {
+//     --is-dark-theme: 1;
+//   }
+// }
+// 
+// @media (prefers-color-scheme: light) {
+//   :root {
+//     --is-dark-theme: 0;
+//   }
+// }
 
 :root {
   @include ngx-mtc.theme-base(); // Creates base colors
+  --is-dark-theme: 0;
 
   // Creates theme colors
   @include ngx-mtc.create-variables-from-color('primary', #EBEBEB, 38%);

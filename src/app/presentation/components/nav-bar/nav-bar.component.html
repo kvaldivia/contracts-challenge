@@ -1,27 +1,28 @@
-<mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>Menu</mat-toolbar>
-    <mat-nav-list>
-      <a mat-list-item href="#">Link 1</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      <span>GetOnTop</span>
-    </mat-toolbar>
-    <!-- Add Content Here -->
-  </mat-sidenav-content>
-</mat-sidenav-container>
+<mat-toolbar class="nav-bar-container">
+  <mat-toolbar-row class="nav-bar-row">
+    <div class="section start">
+      <div class="company-logo">
+      </div>
+    </div>
+    <div class="section middle">
+      <!--
+        NOTE: This would be done over a loop of menus the user has permissions to access.
+        Also, the state validation would be
+      -->
+      <div class="menu contracts" [ngClass]="{'active': isActive('contracts')}">
+        Contracts
+      </div>
+      <div class="menu documents" [ngClass]="{'active': isActive('documents')}">
+        Documents
+      </div>
+      <div class="menu payout" [ngClass]="{'active': isActive('payout')}">
+        Payout
+      </div>
+      <div class="menu time" [ngClass]="{'active': isActive('time')}">
+        Time
+      </div>
+    </div>
+    <div class="section end">
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
